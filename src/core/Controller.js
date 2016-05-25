@@ -2,7 +2,7 @@ export default class Controller
 {
     constructor( View )
     {
-        this.__view = new View();
+        this.__view = View;
     }
 
     setViewProps( props )

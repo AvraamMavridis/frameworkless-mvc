@@ -1,20 +1,28 @@
 import { err, noop } from './helpers';
+import Renderer from './Renderer';
 
 export default class View
 {
-    constructor()
+    constructor( props )
     {
-      this.willRender();
-      this.willMount();
-      this.__timer = setInterval(() =>{
-        if( this.isOnTheDom() )
-        {
-            this.didMount();
-            clearInterval( this.__timer );
-        }
-      }, 0 );
+        this.props = props;
+        this.willMount();
+        this.willRender();
+
+        this.__timer = setInterval(() =>{
+          if( this.isOnTheDom() )
+          {
+              // trigger the didMount hook when the View has been rendered to the DOM
+              this.didMount();
+              clearInterval( this.__timer );
+          }
+        }, 0 );
     }
 
+    /**
+     * Checks if the View is on the DOM
+     * @return {Boolean}
+     */
     isOnTheDom()
     {
         const parser = new DOMParser()
@@ -22,10 +30,15 @@ export default class View
         return document.contains(doc);
     }
 
+    // Some hooks for the render lifecycle
     willMount(){ return noop() };
     didMount(){ return noop() };
     willUpdate(){ return noop() };
 
+    /**
+     * Set the props and re-render
+     * @param { Object } nextProps
+     */
     setProps( nextProps )
     {
         this.props = nextProps;
@@ -33,6 +46,10 @@ export default class View
         this.willRender();
     }
 
+    /**
+     * Return the HTMLElements or String that has been rendered
+     * @return {HTMLElements or String} [description]
+     */
     getElement()
     {
         return this.__element;
@@ -43,9 +60,19 @@ export default class View
         this.__element = this.render();
     }
 
+    appendChild( child )
+    {
+        console.log( this.__element, child );
+        Renderer.render( this.__element, child );
+    }
+
+    /**
+     * Every view that extends the "View" should implement this
+     * method, otherwise we throw an error
+     */
     render()
     {
-       err('Components should have a render method')
+        err('Views should have a render method')
     }
 
 }
