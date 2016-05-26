@@ -1,11 +1,13 @@
+import { err } from '../core/helpers';
+
 export default class Controller
 {
-    constructor( View )
+    constructor( View = err(`Undefined View, check the ${this.constructor.name}`) )
     {
         this.__view = View;
     }
 
-    setViewProps( props )
+    setViewProps( props = err(`Undefined props, in the setViewProps of ${this.constructor.name}`) )
     {
         this.__view.setProps( props );
     }

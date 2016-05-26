@@ -1,4 +1,4 @@
-import View from '../../core/View';
+import View from 'core/View';
 import d3 from 'd3';
 import './styles.css';
 

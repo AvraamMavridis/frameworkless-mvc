@@ -1,4 +1,4 @@
-import { err, isString } from './helpers';
+import { err, isString } from 'core/helpers';
 
 /**
 Renders a view to the DOM
@@ -41,10 +41,6 @@ export default class Renderer
         else if( isString( _el ) )
         {
             target.insertAdjacentHTML( 'afterend', _el );
-        }
-        else
-        {
-            err( '' );
         }
 
      }

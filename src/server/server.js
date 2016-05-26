@@ -25,6 +25,6 @@ const server = function*()
 }();
 
 export async function response(){
-  const value = await server.next().value;
-  return value;
+    const value = await server.next().value;
+    return value;
 }

@@ -1,5 +1,5 @@
-import { err, noop } from './helpers';
-import Renderer from './Renderer';
+import { err, noop } from 'core/helpers';
+import Renderer from 'core/Renderer';
 
 export default class View
 {
@@ -16,7 +16,7 @@ export default class View
               this.didMount();
               clearInterval( this.__timer );
           }
-        }, 0 );
+        }, 1 );
     }
 
     /**
@@ -31,9 +31,9 @@ export default class View
     }
 
     // Some hooks for the render lifecycle
-    willMount(){ return noop() };
-    didMount(){ return noop() };
-    willUpdate(){ return noop() };
+    willMount(){ return noop(); };
+    didMount(){ return noop(); };
+    willUpdate(){ return noop(); };
 
     /**
      * Set the props and re-render
@@ -60,9 +60,11 @@ export default class View
         this.__element = this.render();
     }
 
+    /**
+     * Renders children to the View
+     */
     appendChild( child )
     {
-        console.log( this.__element, child );
         Renderer.render( this.__element, child );
     }
 

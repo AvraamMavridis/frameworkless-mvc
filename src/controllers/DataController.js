@@ -1,21 +1,31 @@
-import DonutChart   from '../views/DonutChart';
-import { response } from '../server/server';
-import Controller   from '../core/Controller';
+import DonutChartView    from 'views/DonutChartView';
+import { response } from 'server/server';
+import Controller   from 'core/Controller';
 
 
 export default class DonutController extends Controller
 {
     constructor( props )
     {
-        super( new DonutChart( props ) );
-        response().then( ({dataEntries}) => {
+        super( new DonutChartView( props ) );
+        const { label } = props;
 
+        response()
+          .then( ({dataEntries}) => {
             const [ totalTablet, totalSmartphone ] = this.calculateTotals( dataEntries );
-
-            this.setViewProps( { totalTablet, totalSmartphone, dataEntries } );
+            this.setViewProps( {
+                label: label.toUpperCase(),
+                totalTablet,
+                totalSmartphone,
+                dataEntries,
+                ...props
+            } );
         });
     }
 
+    /**
+     * NOT USED
+     */
     updateChart()
     {
         response().then( data => this.setViewProps( data ));
