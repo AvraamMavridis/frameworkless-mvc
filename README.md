@@ -1,5 +1,7 @@
 # Frameworkless MVC example/app/whatever
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/AvraamMavridis/frameworkless-mvc.svg)](https://greenkeeper.io/)
+
 ### To run
 
 * You'll need to have [git](https://git-scm.com/) and [node](https://nodejs.org/en/) installed in your system.
